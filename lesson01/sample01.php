@@ -11,7 +11,7 @@
     <!--エスケープシーケンス-->
     <?php
     echo "I'm \"studying\"";
-    
+    echo '<h2>初級</h2>';
     echo 123 + 2 * 5 * 3;
     ?>
 </body>
