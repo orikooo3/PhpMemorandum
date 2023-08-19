@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "IDとパスワードを入力してください"
+AuthUserFile C:\xampp\htdocs\inquiry_form\maintenance\.htpasswd
+require valid-user
