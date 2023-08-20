@@ -58,3 +58,12 @@ foreach ($money as $key => $value) {
     echo $value . '<br>';
 }
 ?>
+
+<?php
+$value = [0, 0, 0, 0, 0, '100' => 'hyaku', 2 => 'ni', '3' => 'san'
+];
+
+echo '<pre>';
+var_dump($value);
+echo '</pre>';
+?>
