@@ -9,12 +9,16 @@
 
 <body>
     <h2>ご予約日</h2>
-    <?php $reserves = $_REQUEST['reserve']; ?>
-    <ui>
-        <?php foreach ($reserves as $reserve) { ?>
-            <li><?php echo htmlspecialchars($reserve, ENT_QUOTES); ?></li>
-        <?php } ?>
-    </ui>
+    <?php if (!empty($_REQUEST['reserve'])) : ?>
+        <?php $reserves = $_REQUEST['reserve']; ?>
+        <ul>
+            <?php foreach ($reserves as $reserve) : ?>
+                <li><?php echo htmlspecialchars($reserve, ENT_QUOTES); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else : ?>
+        <p>予約日がありません</p>
+    <?php endif; ?>
 </body>
 
 </html>
