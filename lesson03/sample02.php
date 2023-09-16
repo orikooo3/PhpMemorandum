@@ -4,18 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sample01</title>
+    <title>Sample02</title>
 </head>
 
 <body>
     <?php
     $db = new mysqli('localhost:3306', 'root', 'root', 'mydb');
-    $db -> query('drop table if exists test');
-    $success = $db -> query(('create table test(id INT)'));
-    if($success){
-        echo 'テーブルを削除して作成';
-    }else {
-        echo 'SQLが正常に動作しなかった';
+    //ASで別名を付けることでわかりやすくなる
+    $records = $db->query('SELECT COUNT(*) AS cnt FROM my_items');
+    if($records){
+        while($record = $records -> fetch_assoc()){
+            echo $record['cnt'].'<br>';
+        }
+    }else{
         echo $db -> error;
     }
     ?>
