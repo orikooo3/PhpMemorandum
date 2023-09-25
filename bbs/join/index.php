@@ -1,6 +1,7 @@
 <?php
 $form = [];
 $error = [];
+if($_SERVER['REQUEST_METHOD'] === 'POST'){}
 $form['name'] = filter_input(INPUT_POST, 'name', FILTER_DEFAULT);
 if ($form['name'] === '') {
     $error['name'] = 'blank';
