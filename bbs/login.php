@@ -20,26 +20,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!$stmt) {
             die($db->error);
         }
-    }
+        $stmt->bind_param('s', $email);
+        $success = $stmt->execute();
+        if (!$success) {
+            die($db->error);
+        }
 
-    $stmt->bind_param('s', $email);
-    $success = $stmt->execute();
-    if (!$success) {
-        die($db->error);
-    }
+        $stmt->bind_result($id, $name, $hash);
+        $stmt->fetch();
 
-    $stmt->bind_result($id, $name, $hash);
-    $stmt->fetch();
-
-    if (password_verify($password, $hash)) {
-        // ログイン成功
-        session_regenerate_id();
-        $_SESSION['id'] = $id;
-        $_SESSION['name'] = $name;
-        header('Location: index.php');
-        exit();
-    } else {
-        $error['login'] = 'failed';
+        if (password_verify($password, $hash)) {
+            // ログイン成功
+            session_regenerate_id();
+            $_SESSION['id'] = $id;
+            $_SESSION['name'] = $name;
+            header('Location: index.php');
+            exit();
+        } else {
+            $error['login'] = 'failed';
+        }
     }
 }
 ?>
@@ -71,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php if (isset($error['login']) && $error['login'] === 'blank') : ?>
                             <p class="error">* メールアドレスとパスワードをご記入ください</p>
                         <?php endif; ?>
-                        <?php if(isset($error['login']) && $error['login'] === 'failed'): ?>
-                        <p class="error">* ログインに失敗しました。正しくご記入ください。</p>
+                        <?php if (isset($error['login']) && $error['login'] === 'failed') : ?>
+                            <p class="error">* ログインに失敗しました。正しくご記入ください。</p>
                         <?php endif; ?>
                     </dd>
                     <dt>パスワード</dt>

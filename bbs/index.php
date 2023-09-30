@@ -78,21 +78,21 @@ $name = $_SESSION['name'];
 
             $stmt->bind_result($id, $member_id, $message, $created, $name, $picture);
 
-            while ($stmt->fetch()): ?>
-            
-            <div class="msg">
+            while ($stmt->fetch()) : ?>
+                <div class="msg">
+                    <?php if ($picture) : ?>
+                        <img src="member_picture/<?php echo h($picture); ?>" width="48" height="48" alt="" />
+                    <?php endif; ?>
 
-                <?php if ($picture): ?>
-                <img src="member_picture/<?php echo h($picture); ?>" width="48" height="48" alt="" />
-                <?php endif; ?>
+                    <p><?php echo h($message); ?><span class="name">（<?php echo h($name); ?>）</span></p>
 
-                <p><?php echo h($message); ?><span class="name">（<?php echo h($name); ?>）</span></p>
+                    <p class="day"><a href="view.php?id=<?php echo h($id); ?>"><?php echo h($created); ?></a>
 
-                <p class="day"><a href="view.php?id="><?php echo h($created); ?></a>
-                
-                    [<a href="delete.php?id=" style="color: #F33;">削除</a>]
-                </p>
-            </div>
+                        <?php if ($_SESSION['id'] === $member_id) : ?>
+                            [<a href="delete.php?id=<?php echo h($id); ?>" style="color: #F33;">削除</a>]
+                        <?php endif; ?>
+                    </p>
+                </div>
             <?php endwhile; ?>
         </div>
     </div>
