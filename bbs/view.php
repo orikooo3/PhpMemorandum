@@ -65,7 +65,9 @@ $db = dbconnect();
 
                     <p class="day"><a href="view.php?id="><?php echo h($created); ?></a>
 
-                        [<a href="delete.php?id=" style="color: #F33;">削除</a>]
+                    <?php if ($_SESSION['id'] === $member_id) : ?>
+                            [<a href="delete.php?id=<?php echo h($id); ?>" style="color: #F33;">削除</a>]
+                        <?php endif; ?>
                     </p>
                 </div>
             <?php else : ?>
